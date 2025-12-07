@@ -10,6 +10,10 @@ class Logic(QMainWindow, Ui_MainWindow):
 
         self.button_submit.clicked.connect(lambda : self.submit())
 
+        self.button_results.clicked.connect(lambda : self.results())
+
+        self.button_back.clicked.connect(lambda : self.stackedWidget.setCurrentIndex(0))
+
     def submit(self):
         try:
             voter_id = self.input_id.text()
@@ -42,3 +46,23 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.label_help.setText("Your vote has been submitted")
             self.label_help.setStyleSheet("")
             self.input_id.setFocus()
+
+    def results(self):
+        self.stackedWidget.setCurrentIndex(1)
+        self.label_totalJane.setStyleSheet("")
+        self.label_totalJohn.setStyleSheet("")
+        total_jane = 0
+        total_john = 0
+        with open('votes.csv', 'r') as csvfile:
+            content = csv.reader(csvfile, delimiter=',')
+            for line in content:
+                if line[1] == "Jane":
+                    total_jane += 1
+                elif line[1] == "John":
+                    total_john +=1
+        self.label_totalJane.setText(f'{total_jane} Jane')
+        self.label_totalJohn.setText(f'{total_john} John')
+        if total_jane > total_john:
+            self.label_totalJane.setStyleSheet("color: green;")
+        elif total_john > total_jane:
+            self.label_totalJohn.setStyleSheet("color: green;")
