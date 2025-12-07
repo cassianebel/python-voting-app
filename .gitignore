@@ -1,0 +1,6 @@
+/votes.csv
+.idea/
+!.idea/runConfigurations/
+!.idea/codeStyles/
+__pycache__/
+*.pyc
