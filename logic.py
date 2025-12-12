@@ -65,11 +65,15 @@ class Logic(QMainWindow, Ui_MainWindow):
         total_john = 0
         with open('votes.csv', 'r') as csvfile:
             content = csv.reader(csvfile, delimiter=',')
-            for line in content:
-                if line[1] == "Jane":
-                    total_jane += 1
-                elif line[1] == "John":
-                    total_john +=1
+            try:
+                for line in content:
+                    if line[1] == "Jane":
+                        total_jane += 1
+                    elif line[1] == "John":
+                        total_john +=1
+            except IndexError:
+                total_jane = 0
+                total_john = 0
         self.label_totalJane.setText(f'{total_jane} Jane')
         self.label_totalJohn.setText(f'{total_john} John')
         if total_jane > total_john:
