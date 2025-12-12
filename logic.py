@@ -8,11 +8,14 @@ class Logic(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
 
+        self.stackedWidget.setCurrentIndex(0)
+
         self.button_submit.clicked.connect(lambda : self.submit())
 
         self.button_results.clicked.connect(lambda : self.results())
 
-        self.button_back.clicked.connect(lambda : self.stackedWidget.setCurrentIndex(0))
+        self.button_back.clicked.connect(lambda : self.reset())
+
 
     def submit(self):
         try:
@@ -43,7 +46,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.radio_group.setExclusive(False)
                 self.radio_group.checkedButton().setChecked(False)
                 self.radio_group.setExclusive(True)
-            self.label_help.setText("Your vote has been submitted")
+            self.label_help.setText(f"{voter_id} vote has been submitted")
             self.label_help.setStyleSheet("")
             self.input_id.setFocus()
 
@@ -66,3 +69,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.label_totalJane.setStyleSheet("color: green;")
         elif total_john > total_jane:
             self.label_totalJohn.setStyleSheet("color: green;")
+
+    def reset(self):
+        self.label_help.setText("")
+        self.stackedWidget.setCurrentIndex(0)
