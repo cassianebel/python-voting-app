@@ -4,7 +4,7 @@ import csv
 import re
 
 class Logic(QMainWindow, Ui_MainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
 
@@ -17,7 +17,10 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.button_back.clicked.connect(lambda : self.reset())
 
 
-    def submit(self):
+    def submit(self) -> None:
+        """
+        Method to validate and collect each vote
+        """
         try:
             voter_id = self.input_id.text()
             if len(voter_id) != 4:
@@ -50,7 +53,11 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.label_help.setStyleSheet("")
             self.input_id.setFocus()
 
-    def results(self):
+    def results(self) -> None:
+        """
+        Method to show the voting results based on the data
+        collected in the csv file
+        """
         self.stackedWidget.setCurrentIndex(1)
         self.label_totalJane.setStyleSheet("")
         self.label_totalJohn.setStyleSheet("")
@@ -70,6 +77,10 @@ class Logic(QMainWindow, Ui_MainWindow):
         elif total_john > total_jane:
             self.label_totalJohn.setStyleSheet("color: green;")
 
-    def reset(self):
+    def reset(self) -> None:
+        """
+        Method to clear the help text when returning
+        from results view to the voting view
+        """
         self.label_help.setText("")
         self.stackedWidget.setCurrentIndex(0)
