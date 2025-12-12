@@ -87,12 +87,12 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Voting App"))
         self.button_results.setText(_translate("MainWindow", "View Results"))
         self.button_submit.setText(_translate("MainWindow", "SUBMIT"))
         self.label_id.setText(_translate("MainWindow", "Voter ID"))
